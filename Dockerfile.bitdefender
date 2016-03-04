@@ -1,0 +1,17 @@
+FROM debian:wheezy
+MAINTAINER Alexey Nurmukhametov <nurmukhametov.alex@gmail.com>
+
+RUN apt-get update
+RUN apt-get install -y python3 libzmq1 python3-zmq python3-requests wget
+
+RUN apt-get install -y psmisc
+RUN cd /opt && wget http://download.bitdefender.com/SMB/Workstation_Security_and_Management/BitDefender_Antivirus_Scanner_for_Unices/Unix/Current/EN_FR_BR_RO/Linux/BitDefender-Antivirus-Scanner-7.7-1-linux-amd64.deb.run \
+    && echo "q" | sh /opt/BitDefender*.run --target dir || true \
+    && dpkg -i /opt/dir/bitdefender-scanner_7.7.1-1809_amd64.deb \
+    && echo "accept" | /opt/BitDefender-scanner/bin/bdscan --update \
+    && rm -rf /opt/dir /opt/BitDefender*.run
+
+COPY plaguescanner.conf /opt/
+COPY bitdefender-agent.py /opt/
+
+CMD PYTHONUNBUFFERED=0 /opt/bitdefender-agent.py

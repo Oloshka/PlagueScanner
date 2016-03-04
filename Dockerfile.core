@@ -1,0 +1,8 @@
+FROM nginx
+MAINTAINER Alexey Nurmukhametov <nurmukhametov.alex@gmail.com>
+
+RUN apt-get update -y
+RUN apt-get install -y python3 libzmq1 python3-zmq
+
+COPY plaguescanner.conf /usr/local/bin
+COPY plaguescanner.py /usr/local/bin

@@ -58,9 +58,6 @@ target/
 # Testing script
 test.py
 
-# Configuration files
-*.conf
-
 # MacOS X Garbage
 ._*
 
@@ -73,3 +70,7 @@ logs/
 
 # Malware archives
 *.zip
+
+# Vagrant folder
+.vagrant
+
