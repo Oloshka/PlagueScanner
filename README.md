@@ -45,3 +45,24 @@ This has been tested with each scanner installed on separate VMs with the Core a
 ```
 $ ./plaguescanner.py sample.exe
 ```
+
+### Quick start guide
+
+You can start from sample framework configuration: Core and 2 Agents (ClamAv and BitDefender). All nodes are represented as docker containers that managed by vagrant.
+
+Install prerequisites:
+
+1.  docker
+2.  vagrant
+
+Run all nodes from project directory:
+
+```
+vagrant up core clam bitdefender --provider=docker
+```
+
+and you can send `<file>` placed in the folder /opt on your machine to analyze:
+
+```
+docker exec core plaguescanner.py /mnt/<file>
+```
